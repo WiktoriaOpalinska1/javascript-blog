@@ -127,3 +127,25 @@ body {
     margin: 0 10px 0 0;
   }
 }
+/* Media */
+@media(max-width: 992px){
+  body{
+    background: rgb(180,0,0);
+    background: linear-gradient(90deg, rgba(180,0,0,1) 0%, rgba(128,0,0,1) 45%, rgba(70,0,0,1) 100%);
+    .wrapper{
+      display: block;
+      .posts{
+        top: 0;
+        margin-top: 10px;
+        //order: 1;
+      }
+      /*.sidebar-titles{
+        order: 2;
+      }*/
+      .sidebar-tags{
+        //order: 3;
+        margin-top: 10px;
+      }
+    }
+  }
+}
