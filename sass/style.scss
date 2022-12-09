@@ -3,7 +3,8 @@
 /* Variables */
 
 $color-light: #fff;
-$color-dark: #444;
+$color-dark: #800000;
+$color-three: #008020;
 
 $font-logo: 'Sacramento', cursive;
 $font-header: 'Oswald', sans-serif;
@@ -16,12 +17,17 @@ $font-text: 'Source Sans Pro', sans-serif;
 }
 
 body {
-  background: $color-light;
+  background-image: url('https://i.postimg.cc/vmPHMqXn/tlo2.png');
+  background-size: cover;
   font-family: $font-text;
   color: $color-dark;
   font-weight: 300;
   font-size: 16px;
   line-height: 1.7;
+  a {
+    text-decoration: none;
+    color: $color-three;
+  }
 }
 
 .container {
@@ -54,6 +60,8 @@ body {
 
 .posts {
   flex: 2 0 0;
+  position: relative;
+  top: -40px;
 }
 
 .sidebar, .posts {
@@ -68,6 +76,7 @@ body {
 
 .logo {
   font-family: $font-logo;
+  color: $color-light;
   font-weight: 400;
   font-size: 104px;
   line-height: 1;
