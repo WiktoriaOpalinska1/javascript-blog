@@ -39,7 +39,7 @@ function titleClickHandler(event){
 }
 
 function generateTitleLinks(){
-  console.log('Link generated')
+  console.log('Link generated');
 
   /* remove contents of titleList */
   const titleList = document.querySelector(optTitleListSelector);
@@ -53,7 +53,7 @@ function generateTitleLinks(){
   for (let article of articles){
     
     /* get the article id */
-    const articleId = article.getAttribute('id')
+    const articleId = article.getAttribute('id');
 
     /* find the title element */
     /* get the title from the title element */
@@ -61,7 +61,7 @@ function generateTitleLinks(){
 
     /* create HTML of the link */
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
-    console.log(linkHTML)
+    console.log(linkHTML);
 
     /* insert link into titleList */
     html = html + linkHTML;
