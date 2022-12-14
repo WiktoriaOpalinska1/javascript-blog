@@ -100,7 +100,6 @@ function generateTags(){
       
       html = html + linkHTML; /*[Done] add generated code to html variable */
     }
-
     
     tagsWrapper.innerHTML = html; /*[Done] insert HTML of all the links into the tags wrapper */
   }
@@ -111,8 +110,7 @@ generateTags();
 function tagClickHandler(event){
 
   /*[Done] prevent default action for this event 
-  and make new constant named "clickedElement" 
-  and give it the value of "this" */
+  and make new constant named "clickedElement" and give it the value of "this" */
   event.preventDefault();
   const clickedElement = this;
 
