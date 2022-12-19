@@ -1,4 +1,10 @@
 'use strict';
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  tagLink: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  authorLink: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
+  //tagCloudLink: Handlebars.compile(document.querySelector('#template-tag-cloud-link').innerHTML),
+};
 
 /* Mam pytanie -  nie mam pomysłu, gdzie może być błąd w klikaniu na autorów po prawej. 
 Klikanie na autorów w tytule działa jak powinno, a w chmurze już pojawia się błąd mimo, że atrybut href jest taki sam. 
@@ -13,6 +19,7 @@ const optArticleSelector = '.post',
   optCloudClassCount = 5,
   optCloudClassPrefix = 'tag-size-',
   optAuthorsListSelector = '.authors.list';
+
 
 // Titles 
 function titleClickHandler(event){
@@ -62,11 +69,10 @@ function generateTitleLinks(customSelector = ''){
     
     const articleTitle = article.querySelector(optTitleSelector).innerHTML; /*[Done] find the title element and get the title from the title element */
     
-    const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>'; /*[Done] create HTML of the link */
-    //console.log(linkHTML);
-    
+    /* generate HTML of the link*/
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
     html = html + linkHTML; /*[Done] insert link into titleList */
-    //console.log(html)
   }
 
   titleList.innerHTML = html;
@@ -97,7 +103,7 @@ function calculateTagsParams(tags){
   return params;
 }
 
-function calcualteTagClass(count, params){
+function calculateTagClass(count, params){
 
   const normalizedCount = count - params.min;
   const normalizedMax = params.max - params.min;
@@ -130,9 +136,9 @@ function generateTags(){
     /*[Done] for each tag generate HTML of the link*/
     for (let tag of articleTagsArray){
 
-      const linkHTML = '<li><a href="#tag-'+ tag +'"><span>' + tag + '</span></a></li>';
-      //console.log(linkHTML);
-      
+      /* generate HTML of the link*/
+      const linkHTMLData = {tagID: tag, tag: tag};
+      const linkHTML = templates.tagLink(linkHTMLData);
       html = html + linkHTML + '  '; /*[Done] add generated code to html variable */
 
       if(!allTags.hasOwnProperty(tag)){    /* [NEW] check if this link is NOT already in allTags */
@@ -146,7 +152,7 @@ function generateTags(){
 
     const tagList = document.querySelector(optTagsListSelector);   /* [NEW] find list of tags in right column */
 
-    /* [NEW] calcualte parameters of tags */
+    /* [NEW] calculate parameters of tags */
     const tagsParams = calculateTagsParams(allTags);
     //console.log('tagsParams: ', tagsParams);
    
@@ -155,7 +161,7 @@ function generateTags(){
     /* [NEW] A loop: for each tag in all Tags 
     [NEW] generate code of a link and add it to allTagsHTML*/
     for (let tag in allTags){
-      allTagsHTML += '<a href="#tag-' + tag + '"><li class="' +  calcualteTagClass(allTags[tag], tagsParams) + '">' + tag + '(' + allTags[tag] + ') ' + '</li></a>';
+      allTagsHTML += '<a href="#tag-' + tag + '"><li class="' +  calculateTagClass(allTags[tag], tagsParams) + '">' + tag + '(' + allTags[tag] + ') ' + '</li></a>';
     }
 
     tagList.innerHTML = allTagsHTML;   /* [NEW] add html from allTagsHTML to tagList */
@@ -223,8 +229,9 @@ function generateAuthors(){
 
     const articleAuthor = article.getAttribute('data-author'); /* get author from data-author attribute */
 
-    const linkHTML = '<a href="#author-' + articleAuthor + '">' + 'by ' + articleAuthor + '</a>'; /* generate HTML of the link*/
-
+    /* generate HTML of the link*/
+    const linkHTMLData = {authorID: articleAuthor, author: articleAuthor};
+    const linkHTML = templates.authorLink(linkHTMLData);
     html = html + linkHTML + '  '; /* add generated code to html variable */
 
     /* [NEW] check if this author is NOT already in allAuthors */
@@ -239,17 +246,16 @@ function generateAuthors(){
   }
 
   const authorList = document.querySelector(optAuthorsListSelector);
-  //authorList.innerHTML = allAuthors.join(' ');
 
-  /* [NEW] calcualte parameters of tags */
+  /* [NEW] calculate parameters of tags */
   const authorParams = calculateTagsParams(allAuthors);
 
-  let allAuthorsHTML = '';
+  let allAuthorsHTML = '';  
 
   /* [NEW] A loop: for each author in allAuthors 
     [NEW] generate code of a link and add it to allAuthorsHTML*/
   for (let author in allAuthors){
-    allAuthorsHTML += '<a href="#author-' + author + '"><li class="' +  calcualteTagClass(allAuthors[author], authorParams) + '">' + author + '(' + allAuthors[author] + ') ' + '</li></a>';
+    allAuthorsHTML += '<a href="#author-' + author + '"><li class="' +  calculateTagClass(allAuthors[author], authorParams) + '">' + author + '(' + allAuthors[author] + ') ' + '</li></a>';
   }
 
   authorList.innerHTML = allAuthorsHTML;
