@@ -56,6 +56,32 @@ body {
 
 .sidebar {
   flex: 1 0 0;
+  /* Tags Cloud */
+  .tag-size-5{
+    font-size: 24px;
+    color: $color-three;
+    font-weight: 700;
+  }
+  .tag-size-4{
+    font-size: 22px;
+    color: $color-dark;
+    font-weight: 600;
+  }
+  .tag-size-3{
+    font-size: 18px;
+    color: $color-three;
+    font-weight: 500;
+  }
+  .tag-size-2{
+    font-size: 16px;
+    color: $color-dark;
+    font-weight: 400;
+  }
+  .tag-size-1{
+    font-size: 14px;
+    color: $color-three;
+    font-weight: 300;
+  }
 }
 
 .posts {
