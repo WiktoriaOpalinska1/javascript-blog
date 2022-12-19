@@ -98,7 +98,7 @@ function generateTags(){
       const linkHTML = '<li><a href="#tag-'+ tag +'"><span>' + tag + '</span></a></li>';
       //console.log(linkHTML);
       
-      html = html + linkHTML; /*[Done] add generated code to html variable */
+      html = html + linkHTML + '  '; /*[Done] add generated code to html variable */
     }
     
     tagsWrapper.innerHTML = html; /*[Done] insert HTML of all the links into the tags wrapper */
